@@ -23,6 +23,7 @@ function getURLVar(key) {
 }
 
 $(document).ready(function() {
+	localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjFiYmQxYWFhZTlhMzk2ZTc1NTA5ZWYiLCJ0eXBlIjoiVXNlciIsImlhdCI6MTY0NTk4NTEwMDIwNiwiZXhwIjoxNjQ4NTc3MTAwMjA3fQ.fFP_ppNEfrHkxnXVCZvpTMo1NpOPeC19bltTQ69BtDA");
 	//Form Submit for IE Browser
 	$('button[type=\'submit\']').on('click', function() {
 		$("form[id*='form-']").submit();
