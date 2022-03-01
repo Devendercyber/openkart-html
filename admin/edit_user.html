@@ -524,10 +524,9 @@ void 0===window.kintMicrotimeInitialized&&(window.kintMicrotimeInitialized=1,win
 <script type="text/javascript" src="../assets/frontend/js/toastr.min.js"></script>
 
 <script type="text/javascript">
-
   $(document).ready(function() {
+      if (!localStorage.getItem("token")) window.location.href = './../admin_console.html';
       getUser();
-      $('.multiple').select2();
       setTimeout(() => {
         $('#example').DataTable();
       }, 1000);
@@ -537,7 +536,7 @@ void 0===window.kintMicrotimeInitialized&&(window.kintMicrotimeInitialized=1,win
       var url = new URLSearchParams(window.location.search);
       let userId = url.get("id");
       $.ajax({
-          url: "https://api.cyberworxindia.com/api/user?_id="+userId,
+          url: localStorage.getItem("BASE_URL")+"/user?_id="+userId,
           headers: {
             authorization: localStorage.getItem("token")
           },
@@ -557,7 +556,6 @@ void 0===window.kintMicrotimeInitialized&&(window.kintMicrotimeInitialized=1,win
           }
       });
   }
-
 </script>
 
 <footer id="footer"><a href="#">Cyberworx</a> &copy; 2019-2022 All Rights Reserved.</footer></div>

@@ -441,83 +441,92 @@ void 0===window.kintMicrotimeInitialized&&(window.kintMicrotimeInitialized=1,win
       </div>
      
      
-      <div class="panel-body">
-       
-      
-      <form action="http://cyberworx.co.in/flipspaces_new/admin/add_user" method="post" enctype="multipart/form-data" id="form-user" class="form-horizontal">
-          
-      
-           <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-username">Username</label>
+      <div class="panel-body form-horizontal">
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-phoneNumber">Phone Number</label>
             <div class="col-sm-10">
-              <input type="text" name="username" value="" placeholder="Username"  class="form-control" />
-
-                         </div>
+              <input type="text" name="phoneNumber" id="phoneNumber" value="" placeholder="Phone Number" class="form-control" />
+            </div>
           </div>
 
           <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-username">Username</label>
             <div class="col-sm-10">
-             
-              <select name="user_group_id" class="form-control" required="required">
-                <option value="">Select</option>
-                                  <option value="1"  >Administration</option>
-                              </select>
-
-                         </div>
+              <input type="text" name="userName" id="userName" value="" placeholder="Username" class="form-control" />
+            </div>
           </div>
       
-          
           <div class="form-group ">
             <label class="col-sm-2 control-label" for="input-firstname">First Name</label>
             <div class="col-sm-10">
-              <input type="text" name="firstname" value="" placeholder="First Name" class="form-control" />
-                          </div>
+              <input type="text" name="firstName" id="firstName" value="" placeholder="First Name" class="form-control" />
+            </div>
           </div>
+
           <div class="form-group ">
             <label class="col-sm-2 control-label" for="input-lastname">Last Name</label>
             <div class="col-sm-10">
-              <input type="text" name="lastname" value="" placeholder="Last Name"  class="form-control" />
-               
+              <input type="text" name="lastName" id="lastName" value="" placeholder="Last Name" class="form-control" />
             </div>
           </div>
+
           <div class="form-group ">
             <label class="col-sm-2 control-label" for="input-email">E-Mail</label>
             <div class="col-sm-10">
-              <input type="text" name="email" value="" placeholder="E-Mail"  class="form-control" />
-
-                          </div>
+              <input type="text" name="email" id="email" value="" placeholder="E-Mail" class="form-control" />
+            </div>
           </div>
+
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-image">Image</label>
             <div class="col-sm-10">
-                            <input type="file" name="photo"  id="input-image" class="form-control" />
+                <input type="file" name="photo" id="input-image" class="form-control" />
             </div>
           </div>
-             <div class="form-group ">
-            <label class="col-sm-2 control-label" for="input-password">Password</label>
-            <div class="col-sm-10">
-              <input type="password" name="password" value=""  placeholder="Password"  class="form-control" autocomplete="off"  />
-              </div>
-              
-          </div>
-          <div class="form-group ">
-            <label class="col-sm-2 control-label" for="input-confirm">Confirm</label>
-            <div class="col-sm-10">
-              <input type="password" name="confirm" value=""  placeholder="Confirm" class="form-control" autocomplete="off" />
 
-                          </div>
-          </div>
           <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-status">Status</label>
+            <label class="col-sm-2 control-label" for="input-username">Role</label>
             <div class="col-sm-10">
-              <select name="status" id="input-status" class="form-control">
-                <option value="0" selected>Disabled</option>
-                <option value="1" >Enabled</option>
+              <select name="role" id="role" class="form-control">
+                <option value="">Select</option>
+                <option value="62090b6f4558914b0e351eb8" selected >Admin</option>
+                <option value="62090b6f4558914b0e351eb9" >Professional</option>
+                <option value="62090b6f4558914b0e351ec0" >User</option>
               </select>
             </div>
           </div>
-        <div style="display:none"><label>Fill This Field</label><input type="text" name="indo_honeypot" value=""/></div></form>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-username">Commision Type</label>
+            <div class="col-sm-10">
+              <select name="commisionType" id="commisionType" class="form-control">
+                <option value="">Select</option>
+                <option value="Bronze" selected >Bronze</option>
+                <option value="Silver" >Silver</option>
+                <option value="Gold" >Gold</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group ">
+            <label class="col-sm-2 control-label" for="input-password">Password</label>
+            <div class="col-sm-10">
+              <input type="password" name="password" id="password" value=""  placeholder="Password"  class="form-control" autocomplete="off"  />
+            </div>    
+          </div>
+          
+          <div class="form-group ">
+            <label class="col-sm-2 control-label" for="input-confirm">Confirm</label>
+            <div class="col-sm-10">
+              <input type="password" name="confirm" id="confirm" value=""  placeholder="Confirm Password" class="form-control" autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="text-right">
+            <button type="submit" class="btn btn-primary" onclick="addUser()"><i class="fa fa-key"></i> Create</button>
+          </div>
+
+          <div style="display:none"><label>Fill This Field</label><input type="text" name="indo_honeypot" value=""/></div></form>
       </div>
     </div>
   </div>
@@ -525,84 +534,74 @@ void 0===window.kintMicrotimeInitialized&&(window.kintMicrotimeInitialized=1,win
 
 <!-- DEBUG-VIEW START 2 APPPATH/Views/admin/footer.php -->
 <script type="text/javascript" src="../assets/backend/javascript/summernote/summernote.js"></script>
- <link href="../assets/backend/javascript/summernote/summernote.css" rel="stylesheet" />
- <script type="text/javascript" src="../assets/backend/javascript/summernote/summernote-image-attributes.js"></script>
- <script type="text/javascript" src="../assets/backend/javascript/summernote/opencart.js"></script>
-  <script type="text/javascript" src="../assets/frontend/js/toastr.min.js"></script>
+<link href="../assets/backend/javascript/summernote/summernote.css" rel="stylesheet" />
+<script type="text/javascript" src="../assets/backend/javascript/summernote/summernote-image-attributes.js"></script>
+<script type="text/javascript" src="../assets/backend/javascript/summernote/opencart.js"></script>
+<script type="text/javascript" src="../assets/frontend/js/toastr.min.js"></script>
  
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#example').DataTable();
-} );
+      if (!localStorage.getItem("token")) window.location.href = './../admin_console.html';
+  });
+
+  function addUser() {
+      if ($('#password').val() != $('#confirm').val()) {
+        alert("Password and Confirm password are not same!");
+        return false;
+      }
+
+      let data = {
+        firstName: $('#firstName').val(),
+        lastName: $('#lastName').val(),
+        userName: $('#userName').val(),
+        email: $('#email').val(),
+        phoneNumber: $('#phoneNumber').val(),
+        role: $('#role').val(),
+        commisionType: $('#commisionType').val(),
+        // file: $('#input-image').val(),
+        password: $('#password').val()
+      };
+
+      $.ajax({
+          url: localStorage.getItem("BASE_URL")+"/user",
+          data: data,
+          headers: {
+            authorization: localStorage.getItem("token")
+          },
+          type: "POST",
+          success: function(response) {
+            if (response.error) alert(response.error);
+            else {
+              alert("Success!")
+              window.location.href = './user.html';
+            }
+          },
+          error: function(data) {
+            alert("User creation failed! "+(data.error || data.responseText || data))
+          }
+      });
+  }
+
+  function uploadImage(image) {
+      var data = new FormData();
+      data.append("image", image);
+
+      $.ajax({
+          url: localStorage.getItem("BASE_URL")+"/file",
+          data: data,
+          headers: {
+            authorization: localStorage.getItem("token")
+          },
+          type: "POST",
+          success: function(response) {
+              var image = $('<img>').attr('src', response.result.path);
+          },
+          error: function(data) {
+              console.log(data);
+          }
+      });
+  }
 </script>
-
-<script type="text/javascript">
-
-$(document).ready(function() {
-    $('.multiple').select2();
-});
-   
-
- $('#summernote').summernote({
-    height: ($(window).height() - 300),
-    callbacks: {
-        onImageUpload: function(image) {
-            uploadImage(image[0]);
-        }
-    }
-});
-
-function uploadImage(image) {
-    var data = new FormData();
-    data.append("image", image);
-    $.ajax({
-        url: "http://cyberworx.co.in/flipspaces_new/admin/upload_image",
-        cache: false,
-        contentType: false,
-        processData: false,
-        data: data,
-        type: "post",
-        success: function(url) {
-              var image = $('<img>').attr('src',url);
-            $('#summernote').summernote("insertNode", image[0]);
-        },
-        error: function(data) {
-            console.log(data);
-        }
-    });
-}
-
-
- $('#summernote1').summernote({
-    height: ($(window).height() - 300),
-    callbacks: {
-        onImageUpload: function(image) {
-            uploadImage1(image[0]);
-        }
-    }
-});
-
-function uploadImage1(image) {
-    var data = new FormData();
-    data.append("image", image);
-    $.ajax({
-        url: "http://cyberworx.co.in/flipspaces_new/admin/upload_image",
-        cache: false,
-        contentType: false,
-        processData: false,
-        data: data,
-        type: "post",
-        success: function(url) {
-              var image = $('<img>').attr('src',url);
-            $('#summernote1').summernote("insertNode", image[0]);
-        },
-        error: function(data) {
-            console.log(data);
-        }
-    });
-}
-</script>
-
 
 <footer id="footer"><a href="#">Cyberworx</a> &copy; 2019-2022 All Rights Reserved.</footer></div>
 <style>
