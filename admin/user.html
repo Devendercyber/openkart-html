@@ -443,35 +443,23 @@ void 0===window.kintMicrotimeInitialized&&(window.kintMicrotimeInitialized=1,win
         <form action="http://cyberworx.co.in/flipspaces_new/admin/delete_users" id="form-user" method="post" accept-charset="utf-8">
  
           <div class="table-responsive">
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover example">
               <thead>
                 <tr>
                   <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
                   <td class="text-left">First Name</td>
                   <td class="text-left">Last Name</td>
                   <td class="text-left">Username</td>
-                  <!-- <td class="text-left">Email</td> -->
-                  <td class="text-left">User Group</td>
+                  <td class="text-left">Email</td>
+                  <td class="text-left">Mobile</td>
+                  <td class="text-left">Role</td>
+                  <td class="text-left">Type</td>
                   <td class="text-left">Status</td>
-                  <td class="text-left">Date Added </td>
+                  <td class="text-left">Date Added</td>
                   <td class="text-left">Action</td>
                 </tr>
               </thead>
-              <tbody>
-                                  <tr>
-                  <td class="text-center"> 
-                  <input type="checkbox" name="selected[]" value="1" />
-                    </td>
-                   <td class="text-left">super</td>
-                    <td class="text-left">admin</td>
-                    <td class="text-left">cyberworx</td>
-                  <!-- <td class="text-left">info@indogroup.com</td> -->
-                  <td class="text-left">Administration</td>
-                  <td class="text-left">Active</td>
-                  <td class="text-left">2021-02-23 15:06:42</td>
-                  <td class="text-left"><a href="add_user/1.html"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i>&nbsp; Edit</button></a></td>
-                </tr>
-                            </tbody>
+              <tbody id ="tableBody"></tbody>
             </table>
           </div>
         <div style="display:none"><label>Fill This Field</label><input type="text" name="indo_honeypot" value=""/></div></form>
@@ -483,96 +471,64 @@ void 0===window.kintMicrotimeInitialized&&(window.kintMicrotimeInitialized=1,win
 
 <!-- DEBUG-VIEW START 2 APPPATH/Views/admin/footer.php -->
 <script type="text/javascript" src="../assets/backend/javascript/summernote/summernote.js"></script>
- <link href="../assets/backend/javascript/summernote/summernote.css" rel="stylesheet" />
- <script type="text/javascript" src="../assets/backend/javascript/summernote/summernote-image-attributes.js"></script>
- <script type="text/javascript" src="../assets/backend/javascript/summernote/opencart.js"></script>
-  <script type="text/javascript" src="../assets/frontend/js/toastr.min.js"></script>
- 
+<link href="../assets/backend/javascript/summernote/summernote.css" rel="stylesheet" />
+<script type="text/javascript" src="../assets/backend/javascript/summernote/summernote-image-attributes.js"></script>
+<script type="text/javascript" src="../assets/backend/javascript/summernote/opencart.js"></script>
+<script type="text/javascript" src="../assets/frontend/js/toastr.min.js"></script>
+
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#example').DataTable();
-} );
+      if (!localStorage.getItem("token")) window.location.href = './../admin_console.html';
+      getUsers();
+      setTimeout(() => {
+        $('#example').DataTable();
+      }, 1000);
+  });
+
+  function getUsers() {
+      $.ajax({
+          url: localStorage.getItem("BASE_URL")+"/user",
+          headers: {
+            authorization: localStorage.getItem("token")
+          },
+          type: "GET",
+          success: function(response) {
+            let tableData = '';
+            (response.result || []).forEach((row, i) => {
+              tableData += `<tr>
+                <td class="text-center"><input type="checkbox" name="selected[]" value="${i+1}"/></td>
+                <td class="text-center">${row.firstName || ''}</td>
+                <td class="text-center">${row.lastName || ''}</td>
+                <td class="text-center">${row.userName || ''}</td>
+                <td class="text-center">${row.email || ''}</td>
+                <td class="text-center">${row.phoneNumber || ''}</td>
+                <td class="text-center">${row.role || ''}</td>
+                <td class="text-center">${row.commisionType || ''}</td>
+                <td class="text-center">${row.active ? 'Active' : 'Inactive'}</td>
+                <td class="text-center">${moment(row.createdAt || '').format('DD/MM/YYYY HH:mm:SS')}</td>
+                <td class="text-left"><a href="edit_user.html?id=${row._id}"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i>&nbsp; Edit</button></a></td>
+              </tr>`;
+            });
+              
+              $('#tableBody').append(tableData)
+          },
+          error: function(data) {
+              console.log(data);
+          }
+      });
+  }
 </script>
-
-<script type="text/javascript">
-
-$(document).ready(function() {
-    $('.multiple').select2();
-});
-   
-
- $('#summernote').summernote({
-    height: ($(window).height() - 300),
-    callbacks: {
-        onImageUpload: function(image) {
-            uploadImage(image[0]);
-        }
-    }
-});
-
-function uploadImage(image) {
-    var data = new FormData();
-    data.append("image", image);
-    $.ajax({
-        url: "http://cyberworx.co.in/flipspaces_new/admin/upload_image",
-        cache: false,
-        contentType: false,
-        processData: false,
-        data: data,
-        type: "post",
-        success: function(url) {
-              var image = $('<img>').attr('src',url);
-            $('#summernote').summernote("insertNode", image[0]);
-        },
-        error: function(data) {
-            console.log(data);
-        }
-    });
-}
-
-
- $('#summernote1').summernote({
-    height: ($(window).height() - 300),
-    callbacks: {
-        onImageUpload: function(image) {
-            uploadImage1(image[0]);
-        }
-    }
-});
-
-function uploadImage1(image) {
-    var data = new FormData();
-    data.append("image", image);
-    $.ajax({
-        url: "http://cyberworx.co.in/flipspaces_new/admin/upload_image",
-        cache: false,
-        contentType: false,
-        processData: false,
-        data: data,
-        type: "post",
-        success: function(url) {
-              var image = $('<img>').attr('src',url);
-            $('#summernote1').summernote("insertNode", image[0]);
-        },
-        error: function(data) {
-            console.log(data);
-        }
-    });
-}
-</script>
-
 
 <footer id="footer"><a href="#">Cyberworx</a> &copy; 2019-2022 All Rights Reserved.</footer></div>
 <style>
     .toast-top-right .toast {
-    background-color: #1d1d1d !important;
-    box-shadow: 0 0 12px #484848 !important;
-    border: 1px solid #3a3a3a;
-}
+        background-color: #1d1d1d !important;
+        box-shadow: 0 0 12px #484848 !important;
+        border: 1px solid #3a3a3a;
+    }
 </style>
 
 <!-- DEBUG-VIEW ENDED 2 APPPATH/Views/admin/footer.php -->
-
 
 </body>
 

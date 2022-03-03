@@ -24,19 +24,19 @@ void 0===window.kintMicrotimeInitialized&&(window.kintMicrotimeInitialized=1,win
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- DEBUG-VIEW START 1 APPPATH/Views/admin/header.php -->
-<link href="../../assets/backend/stylesheet/bootstrap.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="../../assets/backend/javascript/jquery/jquery-2.1.1.min.js"></script> 
+<link href="../assets/backend/stylesheet/bootstrap.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../assets/backend/javascript/jquery/jquery-2.1.1.min.js"></script> 
 <!-- <script type="text/javascript" src="assets/backend/javascript/jquery.min.js"></script> -->
-<script type="text/javascript" src="../../assets/backend/javascript/bootstrap/js/bootstrap.min.js"></script>
-<link href="../../assets/backend/javascript/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
-<script src="../../assets/backend/javascript/jquery/datetimepicker/moment/moment.min.js" type="text/javascript"></script>
-<script src="../../assets/backend/javascript/jquery/datetimepicker/moment/moment-with-locales.min.js" type="text/javascript"></script>
-<script src="../../assets/backend/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
-<link href="../../assets/backend/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" media="screen" />
-<link type="text/css" href="../../assets/backend/stylesheet/stylesheet.css" rel="stylesheet" media="screen" />
-<link type="text/css" href="../../assets/frontend/css/toastr.css" rel="stylesheet" />
+<script type="text/javascript" src="../assets/backend/javascript/bootstrap/js/bootstrap.min.js"></script>
+<link href="../assets/backend/javascript/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+<script src="../assets/backend/javascript/jquery/datetimepicker/moment/moment.min.js" type="text/javascript"></script>
+<script src="../assets/backend/javascript/jquery/datetimepicker/moment/moment-with-locales.min.js" type="text/javascript"></script>
+<script src="../assets/backend/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+<link href="../assets/backend/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" media="screen" />
+<link type="text/css" href="../assets/backend/stylesheet/stylesheet.css" rel="stylesheet" media="screen" />
+<link type="text/css" href="../assets/frontend/css/toastr.css" rel="stylesheet" />
 
- <script src="../../assets/backend/javascript/common.js" type="text/javascript"></script>
+ <script src="../assets/backend/javascript/common.js" type="text/javascript"></script>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 
 <!-- ckeditor -->
@@ -53,7 +53,7 @@ void 0===window.kintMicrotimeInitialized&&(window.kintMicrotimeInitialized=1,win
 
 <script src="../../../../cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 
-<link type="text/css" href="../../assets/backend/stylesheet/custom.css" rel="stylesheet" media="screen" />
+<link type="text/css" href="../assets/backend/stylesheet/custom.css" rel="stylesheet" media="screen" />
 
  </head>
 
@@ -442,168 +442,121 @@ void 0===window.kintMicrotimeInitialized&&(window.kintMicrotimeInitialized=1,win
      
      
       <div class="panel-body">
-       
-      
-      <form action="http://cyberworx.co.in/flipspaces_new/admin/add_user/1" method="post" enctype="multipart/form-data" id="form-user" class="form-horizontal">
-          
-      
-           <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-username">Username</label>
-            <div class="col-sm-10">
-              <input type="text" name="username" value="cyberworx" placeholder="Username"  class="form-control" />
-
-                         </div>
-          </div>
-
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-username">Username</label>
-            <div class="col-sm-10">
-             
-              <select name="user_group_id" class="form-control" required="required">
-                <option value="">Select</option>
-                                  <option value="1" selected >Administration</option>
-                              </select>
-
-                         </div>
-          </div>
-      
-          
-          <div class="form-group ">
-            <label class="col-sm-2 control-label" for="input-firstname">First Name</label>
-            <div class="col-sm-10">
-              <input type="text" name="firstname" value="super" placeholder="First Name" class="form-control" />
-                          </div>
-          </div>
-          <div class="form-group ">
-            <label class="col-sm-2 control-label" for="input-lastname">Last Name</label>
-            <div class="col-sm-10">
-              <input type="text" name="lastname" value="admin" placeholder="Last Name"  class="form-control" />
-               
-            </div>
-          </div>
-          <div class="form-group ">
-            <label class="col-sm-2 control-label" for="input-email">E-Mail</label>
-            <div class="col-sm-10">
-              <input type="text" name="email" value="info@indogroup.com" placeholder="E-Mail"  class="form-control" />
-
-                          </div>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-image">Image</label>
-            <div class="col-sm-10">
-                              <img src="../../uploads/images/1642223944_122d6a644e5ee28f83be.jpg" width="100" height="100">
-                            <input type="file" name="photo"  id="input-image" class="form-control" />
-            </div>
-          </div>
-             <div class="form-group ">
-            <label class="col-sm-2 control-label" for="input-password">Password</label>
-            <div class="col-sm-10">
-              <input type="password" name="password" value=""  placeholder="Password"  class="form-control" autocomplete="off"  />
+        <form action="" method="post" enctype="multipart/form-data" id="form-user" class="form-horizontal">
+            <div class="form-group required">
+              <label class="col-sm-2 control-label" for="input-username">Phone Number</label>
+              <div class="col-sm-10">
+                <input type="text" disabled name="phoneNumber" id="phoneNumber" value="" placeholder="Phone Number" class="form-control" />
               </div>
-              
-          </div>
-          <div class="form-group ">
-            <label class="col-sm-2 control-label" for="input-confirm">Confirm</label>
-            <div class="col-sm-10">
-              <input type="password" name="confirm" value=""  placeholder="Confirm" class="form-control" autocomplete="off" />
-
-                          </div>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-status">Status</label>
-            <div class="col-sm-10">
-              <select name="status" id="input-status" class="form-control">
-                <option value="0" >Disabled</option>
-                <option value="1" selected>Enabled</option>
-              </select>
             </div>
-          </div>
-        <div style="display:none"><label>Fill This Field</label><input type="text" name="indo_honeypot" value=""/></div></form>
+
+            <div class="form-group required">
+              <label class="col-sm-2 control-label" for="input-username">Username</label>
+              <div class="col-sm-10">
+                <input type="text" name="userName" id="userName" value="cyberworx" placeholder="Username" class="form-control" />
+              </div>
+            </div>
+        
+            <div class="form-group ">
+              <label class="col-sm-2 control-label" for="input-firstname">First Name</label>
+              <div class="col-sm-10">
+                <input type="text" name="firstName" id="firstName" value="" placeholder="First Name" class="form-control" />
+              </div>
+            </div>
+
+            <div class="form-group ">
+              <label class="col-sm-2 control-label" for="input-lastname">Last Name</label>
+              <div class="col-sm-10">
+                <input type="text" name="lastName" id="lastName" value="" placeholder="Last Name" class="form-control" />
+              </div>
+            </div>
+
+            <div class="form-group ">
+              <label class="col-sm-2 control-label" for="input-email">E-Mail</label>
+              <div class="col-sm-10">
+                <input type="text" name="email" id="email" value="" placeholder="E-Mail" class="form-control" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="input-username">Role</label>
+              <div class="col-sm-10">
+                <select name="role" id="role" class="form-control">
+                  <option value="">Select</option>
+                  <option value="62090b6f4558914b0e351eb8" selected >Admin</option>
+                  <option value="62090b6f4558914b0e351eb9" >Professional</option>
+                  <option value="62090b6f4558914b0e351ec0" >User</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="input-username">Commision Type</label>
+              <div class="col-sm-10">
+                <select name="commisionType" id="commisionType" class="form-control">
+                  <option value="">Select</option>
+                  <option value="Bronze" selected >Bronze</option>
+                  <option value="Silver" >Silver</option>
+                  <option value="Gold" >Gold</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- <div class="form-group">
+              <label class="col-sm-2 control-label" for="input-image">Image</label>
+              <div class="col-sm-10">
+                <img src="../../uploads/images/1642223944_122d6a644e5ee28f83be.jpg" width="100" height="100">
+                <input type="file" name="photo"  id="input-image" class="form-control" />
+              </div>
+            </div> -->
+
+        </form>
       </div>
     </div>
   </div>
 </div>
 
 <!-- DEBUG-VIEW START 2 APPPATH/Views/admin/footer.php -->
-<script type="text/javascript" src="../../assets/backend/javascript/summernote/summernote.js"></script>
- <link href="../../assets/backend/javascript/summernote/summernote.css" rel="stylesheet" />
- <script type="text/javascript" src="../../assets/backend/javascript/summernote/summernote-image-attributes.js"></script>
- <script type="text/javascript" src="../../assets/backend/javascript/summernote/opencart.js"></script>
-  <script type="text/javascript" src="../../assets/frontend/js/toastr.min.js"></script>
- 
+<script type="text/javascript" src="../assets/backend/javascript/summernote/summernote.js"></script>
+<link href="../assets/backend/javascript/summernote/summernote.css" rel="stylesheet" />
+<script type="text/javascript" src="../assets/backend/javascript/summernote/summernote-image-attributes.js"></script>
+<script type="text/javascript" src="../assets/backend/javascript/summernote/opencart.js"></script>
+<script type="text/javascript" src="../assets/frontend/js/toastr.min.js"></script>
+
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#example').DataTable();
-} );
+      if (!localStorage.getItem("token")) window.location.href = './../admin_console.html';
+      getUser();
+      setTimeout(() => {
+        $('#example').DataTable();
+      }, 1000);
+  });
+
+  function getUser() {
+      var url = new URLSearchParams(window.location.search);
+      let userId = url.get("id");
+      $.ajax({
+          url: localStorage.getItem("BASE_URL")+"/user?_id="+userId,
+          headers: {
+            authorization: localStorage.getItem("token")
+          },
+          type: "GET",
+          success: function(response) {
+            let user = (response.result || [])[0] || {};
+            $('#firstName').val(user.firstName || '');
+            $('#lastName').val(user.lastName || '');
+            $('#userName').val(user.userName || '');
+            $('#email').val(user.email || '');
+            $('#phoneNumber').val(user.phoneNumber || '');
+            $('#role').val(user.role || '');
+            $('#commisionType').val(user.commisionType || '');
+          },
+          error: function(data) {
+              console.log(data);
+          }
+      });
+  }
 </script>
-
-<script type="text/javascript">
-
-$(document).ready(function() {
-    $('.multiple').select2();
-});
-   
-
- $('#summernote').summernote({
-    height: ($(window).height() - 300),
-    callbacks: {
-        onImageUpload: function(image) {
-            uploadImage(image[0]);
-        }
-    }
-});
-
-function uploadImage(image) {
-    var data = new FormData();
-    data.append("image", image);
-    $.ajax({
-        url: "http://cyberworx.co.in/flipspaces_new/admin/upload_image",
-        cache: false,
-        contentType: false,
-        processData: false,
-        data: data,
-        type: "post",
-        success: function(url) {
-              var image = $('<img>').attr('src',url);
-            $('#summernote').summernote("insertNode", image[0]);
-        },
-        error: function(data) {
-            console.log(data);
-        }
-    });
-}
-
-
- $('#summernote1').summernote({
-    height: ($(window).height() - 300),
-    callbacks: {
-        onImageUpload: function(image) {
-            uploadImage1(image[0]);
-        }
-    }
-});
-
-function uploadImage1(image) {
-    var data = new FormData();
-    data.append("image", image);
-    $.ajax({
-        url: "http://cyberworx.co.in/flipspaces_new/admin/upload_image",
-        cache: false,
-        contentType: false,
-        processData: false,
-        data: data,
-        type: "post",
-        success: function(url) {
-              var image = $('<img>').attr('src',url);
-            $('#summernote1').summernote("insertNode", image[0]);
-        },
-        error: function(data) {
-            console.log(data);
-        }
-    });
-}
-</script>
-
 
 <footer id="footer"><a href="#">Cyberworx</a> &copy; 2019-2022 All Rights Reserved.</footer></div>
 <style>
