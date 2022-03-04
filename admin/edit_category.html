@@ -653,7 +653,7 @@
 
 
 
-<body onload="getCategory();">
+<body onload="loadCategory();">
   <div id="container">
     <header id="header" class="navbar navbar-static-top">
       <div class="container-fluid">
@@ -1027,7 +1027,7 @@
       <div class="page-header">
         <div class="container-fluid">
           <div class="pull-right">
-            <button onclick="addCategory()"  title="Save" class="btn btn-primary" id="addcategory"><i
+            <button onclick="editCategory()"  title="Save" class="btn btn-primary" id="editcategory"><i
                 class="fa fa-save"></i></button>
             <a href="list_category.html" data-toggle="tooltip" title="Cancel" class="btn btn-default"><i
                 class="fa fa-reply"></i></a>
@@ -1107,8 +1107,8 @@
                   <div class="col-sm-10">
                     <select class="form-control" name="status" id="status" required="required">
                       <option value=""> Select option </option>
-                      <option value="1"> Active </option>
-                      <option value="0" selected> Deactive </option>
+                      <option value="true"> Active </option>
+                      <option value="false"> Deactive </option>
 
                     </select>
 
@@ -1144,6 +1144,30 @@
 
       });
 
+      function loadCategory(){
+        var id = getURLVar("id");
+      $.ajax({
+          url: localStorage.getItem("BASE_URL")+"/api/category?_id="+id,
+          cache: false,
+          type: "get",
+          success: function (res) {
+            if(res.result.length > 0 ){
+              category = res.result[0];
+              console.log(category)
+              $("#category_name").val(category.category_name);
+              $("#type").val(category.type);
+              $("#commission").val(category.commision);
+              $("#commission_type").val(category.commisionType);
+              $("#status").val(category.active.toString());
+          }
+          },
+          error: function (data) {
+            console.log(data);
+          }
+        });
+}
+   
+
       $('#summernote').summernote({
         height: ($(window).height() - 300),
         callbacks: {
@@ -1152,28 +1176,9 @@
           }
         }
       });
-
-      function getCategory(){
-        var urlvars = getURLVar("id");
-        $.ajax({
-          url: "http://localhost:5000/api/category?_id="+urlvars,
-          cache: false,
-          type: "get",
-          success: function (res) {
-            console.log(res['result'][0])
-            if(res && res['result'].length > 0)
-            let result = res['result'][0];
-            console.log(result)
-            $("#category_name").val(result.category_name);
-          },
-          error: function (data) {
-            console.log(data);
-          }
-        });
-      }
       
       function editCategory(){
-        var urlvars = getURLVar("id");
+        var id = getURLVar("id");
         var category = $("#category_name").val();
         var type = $("#type").val();
         var commission = $("#commission").val();
@@ -1186,10 +1191,13 @@
         }
         var data = {"category_name":category, "type":type, "commision":commission, "commisionType": commission_type, "active": status};
         $.ajax({
-          url: "http://localhost:5000/api/category?id="+urlvars,
+          url: localStorage.getItem("BASE_URL")+"/api/category/"+id,
+          headers: {
+            authorization : localStorage.getItem("token")
+          },
           cache: false,
           data: data,
-          type: "update",
+          type: "PUT",
           success: function (res) {
             console.log(res);
           },
