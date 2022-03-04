@@ -479,8 +479,8 @@
 
   function getHelp() {
       $.ajax({
-         // url: localStorage.getItem("BASE_URL")+"/help",
-          url: "http://localhost:5000/api/help",
+          url: localStorage.getItem("BASE_URL")+"/help",
+          //url: "http://localhost:5000/api/help",
           headers: {
             authorization: localStorage.getItem("token")
           },

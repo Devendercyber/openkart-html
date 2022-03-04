@@ -474,7 +474,7 @@
         $('#example').DataTable();
       }, 1000);
   });
-
+  
   function getServices() {
       $.ajax({
           url: localStorage.getItem("BASE_URL")+"/service",
@@ -491,7 +491,10 @@
                 <td class="text-center">${row.description || ''}</td>
                 <td class="text-center">${row.active ? 'Active' : 'Inactive'}</td>
                 <td class="text-center">${moment(row.createdAt || '').format('DD/MM/YYYY HH:mm:SS')}</td>
-                <td class="text-left"><a href="edit_service.html?id=${row._id}"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i>&nbsp; Edit</button></a></td>
+                <td class="text-left">
+                <a href="edit_service.html?id=${row._id}"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i>&nbsp; Edit</button></a>
+                <button type="button" class="btn btn-danger" onclick="deleteService('${row._id}')" ><i class="fa fa-pencil"></i>&nbsp; Delete</button></a>
+                </td>
               </tr>`;
             });
               
@@ -501,6 +504,31 @@
               console.log(data);
           }
       });
+  }
+  function deleteService(id)
+  {
+
+    $.ajax({
+         //url: localStorage.getItem("BASE_URL")+"/service/"+id,
+          url: "http//localhost:5000/api/service/"+id,
+          headers: {
+            authorization: localStorage.getItem("token")
+          },
+          type: "DELETE",
+          success :function(response)
+          {
+            if (response.error) alert(response.error);
+            else {
+              alert("Delete Successful!")
+              window.location.href = './user.html';
+            }
+          },
+          error : function(data)
+          {
+             alert("Service deletion failed! "+(data.error || data.responseText || data)) 
+          }
+    });
+    
   }
 </script>
 
