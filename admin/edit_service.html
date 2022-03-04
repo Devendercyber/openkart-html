@@ -546,10 +546,10 @@
         
 
     
-        $.ajax({
+        $.ajax({ 
            
-      //url: localStorage.getItem("BASE_URL")+"/service",
-            url: "http://localhost:5000/api/service/"+userId,
+            url: localStorage.getItem("BASE_URL")+"/service"+userId,
+            //url: "http://localhost:5000/api/service/"+userId,
             type:'PUT',
             data:formData,
             dataType: 'json',                   
@@ -572,8 +572,8 @@
      var url = new URLSearchParams(window.location.search);
       let userId = url.get("id");
     $.ajax({
-          //url: localStorage.getItem("BASE_URL")+"/tags",
-          url: "http://localhost:5000/api/service?_id="+userId,
+          url: localStorage.getItem("BASE_URL")+"/service?_id="+userId,
+          //url: "http://localhost:5000/api/service?_id="+userId,
           headers: {
             authorization: localStorage.getItem("token")
           },
@@ -597,8 +597,8 @@
   {
   let where = { "active" : true};
     $.ajax({
-          //url: localStorage.getItem("BASE_URL")+"/tags",
-          url: "http://localhost:5000/api/tags",
+          url: localStorage.getItem("BASE_URL")+"/tags",
+          //url: "http://localhost:5000/api/tags",
           headers: {
             authorization: localStorage.getItem("token")
           },
@@ -622,8 +622,8 @@
   {
   let where = { "role" : "61fcef4beb482c9afb25a239"};
     $.ajax({
-          //url: localStorage.getItem("BASE_URL")+"/user",
-          url: "http://localhost:5000/api/user",
+          url: localStorage.getItem("BASE_URL")+"/user",
+          //url: "http://localhost:5000/api/user",
           headers: {
             authorization: localStorage.getItem("token")
           },
