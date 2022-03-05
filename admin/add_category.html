@@ -1107,8 +1107,8 @@
                   <div class="col-sm-10">
                     <select class="form-control" name="status" id="status" required="required">
                       <option value=""> Select option </option>
-                      <option value="1"> Active </option>
-                      <option value="0" selected> Deactive </option>
+                      <option value="true"> Active </option>
+                      <option value="false" selected> Deactive </option>
 
                     </select>
 
@@ -1166,7 +1166,7 @@
         }
         var data = {"category_name":category, "type":type, "commision":commission, "commisionType": commission_type, "active": status};
         $.ajax({
-          url: "http://localhost:5000/api/category",
+          url: localStorage.getItem("BASE_URL")+"/api/category",
           cache: false,
           data: data,
           type: "post",

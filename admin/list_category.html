@@ -496,7 +496,7 @@ $(document).ready(function() {
 function loadCategory(){
   var html = '';
       $.ajax({
-          url: "http://localhost:5000/api/category",
+          url: localStorage.getItem("BASE_URL")+"/api/category",
           cache: false,
           type: "get",
           success: function (res) {
