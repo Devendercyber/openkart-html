@@ -35,13 +35,13 @@
 <script src="http://cyberworx.co.in/flipspaces_new/assets/ckfinder/ckfinder.js"></script> -->
 
 <!-- select 2 -->
-<link href="../../../cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-<script src="../../../cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
 <!-- datatable -->
-<link href="../../../cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet" />
 
-<script src="../../../cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 
 <link type="text/css" href="../assets/backend/stylesheet/custom.css" rel="stylesheet" media="screen" />
 
@@ -443,27 +443,37 @@
             </div>
           </div>
           <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-username">Category</label>
+            <div class="col-sm-10">
+              <select name="category" id="category" class="form-control">
+                <option value="">Select Category</option>
+                
+              </select>
+            </div>
+          </div>
+          <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-phoneNumber">Heading</label>
             <div class="col-sm-10">
               <input type="text" name="name" id="name" value="" placeholder="Heading" class="form-control" />
             </div>
           </div>
-      <div class="form-group required">
+      <!-- <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-phoneNumber">Tags </label>
             <div class="col-sm-10">
-             <!--  <input type="text" name="tags" id="tags" value="" placeholder="Tags (Use Comma for multiple)" class="form-control" /> -->
-                <select name="tags[]" id="tags" class="form-control">
+              <input type="text" name="tags" id="tags" value="" placeholder="Tags (Use Comma for multiple)" class="form-control" />
+                <select name="tags[]" id="tags" class="form-control js-example-tags" multiple="multiple">
                 <option value="">Select Tags</option>
                 
               </select>
             </div>
-          </div>
+          </div> -->
         
 
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-image">Image</label>
             <div class="col-sm-10">
-                <input type="file" name="files" id="files" class="form-control" multiple/>
+                <img src="" id="images">
+                <input type="file" name="files" id="files" class="form-control" />
             </div>
           </div>
       
@@ -475,22 +485,22 @@
             </div>
           </div>
 
-         <!--  <div class="form-group">
+          <div class="form-group">
             <label class="col-sm-2 control-label" for="input-image">Status</label>
             <div class="col-sm-10">
                <select class="form-control" id="status" name="status">
                 <option value="">Select Status</option>
-                <option value="1" selected >Active</option>
-                <option value="0">De Active</option>
+                <option value="true" selected >Active</option>
+                <option value="false">De Active</option>
                </select>
             </div>
-          </div> -->
+          </div>
 
          
 
         
-          <input type="hidden" name="category" id="category" value="61fd4f42eb482c9afb25a23f">
-      
+      <!--     <input type="hidden" name="category" id="category" value="61fd4f42eb482c9afb25a23f">
+       -->
          
 
           <div class="text-right">
@@ -517,57 +527,90 @@
       if (!localStorage.getItem("token")) window.location.href = './../admin_console.html';
     getProfessional();
     getTags();
+   
     getServices();
   });
    
- 
-  $('#saveServiceData').on('submit',(function(e) {
-        e.preventDefault();
-        let tags = new Array($("#tags").val());
-     var url = new URLSearchParams(window.location.search);
-      let userId = url.get("id");
+   function getProfessional()
+  {
+  let where = { "role" : "62090b6f4558914b0e351eb9"};
+    $.ajax({
+          url: localStorage.getItem("BASE_URL")+"/user?role=62090b6f4558914b0e351eb9",
+          //url: "http://localhost:5000/api/user",
+          headers: {
+            authorization: localStorage.getItem("token")
+          },
+          type: "GET",
+          data : '',
+          success: function(response) {
       
-       var formData = new FormData();
-     //formData.delete("tags");
-     
-      
-    //formData.append( 'files', input.files[0] );
-      formData.append( 'name', $("#name").val());
-      formData.append( 'createdBy', $("#professionalList").val());
-      formData.append( 'description', $("#description").val());
-      // formData.append( 'active', $("#status").val()==1?true:false);
-      formData.append( 'category', "61fd4f42eb482c9afb25a23f");
-         for (var i = 0; i < tags.length; i++) {
-        formData.append("tags[" + i + "]", tags[i])
-        }
-      for (let i = 0; i < document.getElementById("files").files.length; i++) {
-          formData.append("files", document.getElementById("files").files[i])
-         }
-        
-
-    
-        $.ajax({ 
-           
-            url: localStorage.getItem("BASE_URL")+"/service"+userId,
-            //url: "http://localhost:5000/api/service/"+userId,
-            type:'PUT',
-            data:formData,
-            dataType: 'json',                   
-            async: false,
-            processData: false,
-            contentType: false,
-            mimeType: "multipart/form-data",
-            success:function(data){
-                console.log("success");
-                console.log(data);
-            },
-           error: function(data) {
+            let responseData = {};
+            (response.result || []).forEach((row, i) => {
+              responseData += `<option value="${row._id}">${row.firstName || ''}</option>`;
+            });
+              
+              $('#professionalList').append(responseData)
+          },
+          error: function(data) {
               console.log(data);
           }
-    })
+      });
+  }
+  $(document).on("change","#professionalList",function(){
+    let professionalId = $("#professionalList").val();
+       $.ajax({
+          url: localStorage.getItem("BASE_URL")+"/user/categories?_id="+professionalId,
+          //url: "http://localhost:5000/api/user",
+          headers: {
+            authorization: localStorage.getItem("token")
+          },
+          type: "GET",
+          data : '',
+          success: function(response) {
+            let responseData = {};
+            (response.result[0].category || []).forEach((row, i) => {
+              responseData += `<option value="${row._id}">${row.name || ''}</option>`;
+            });
+              
+              $('#category').html(responseData)
+          },
+          error: function(data) {
+              console.log(data);
+          }
+      });
+  
   })
-  );
-    function getServices()
+    
+function getCategory()
+{
+     let professionalId = $("#professionalList").val();
+    
+       $.ajax({
+          url: localStorage.getItem("BASE_URL")+"/user/categories?_id="+professionalId,
+          //url: "http://localhost:5000/api/user",
+          headers: {
+            authorization: localStorage.getItem("token")
+          },
+          type: "GET",
+          data : '',
+          success: function(response) {
+
+            let responseData = {};
+            (response.result[0].category || []).forEach((row, i) => {
+              responseData += `<option value="${row._id}">${row.name || ''}</option>`;
+            });
+              
+              $('#category').append(responseData)
+              $("#category").val(localStorage.getItem("thisCatId")); 
+              localStorage.removeItem("thisCatId")
+          },
+          error: function(data) {
+              console.log(data);
+          }
+      });
+
+}
+ function getServices()
   {
      var url = new URLSearchParams(window.location.search);
       let userId = url.get("id");
@@ -581,11 +624,21 @@
           data : '',
           success: function(response) {
             let responseData = (response.result || [])[0] || {};
-                console.log(responseData);
+
+               
                   $("#name").val(responseData.name || '');
-                  $("#professionalList").val(responseData.createdBy || '');
+                  $("#professionalList").val(responseData.createdBy || '');             
+                   getCategory();
+                   localStorage.setItem("thisCatId", responseData.category._id)
+                 // $("#category").val(responseData.category._id || ''); 
                   $("#description").val(responseData.description || '');
-                  $("#tags").val(responseData.tags || '');
+                   // $("#tags").val(responseData.tags || '');
+                 
+               
+      
+                  $("#images").attr("src",responseData.files ? responseData.files[0].smallFile : '');
+                   
+
           },
           error: function(data) {
               console.log(data);
@@ -618,37 +671,70 @@
       });
   }
   
-  function getProfessional()
-  {
-  let where = { "role" : "61fcef4beb482c9afb25a239"};
-    $.ajax({
-          url: localStorage.getItem("BASE_URL")+"/user",
-          //url: "http://localhost:5000/api/user",
-          headers: {
-            authorization: localStorage.getItem("token")
-          },
-          type: "GET",
-          data : '',
-          success: function(response) {
+  $('#saveServiceData').on('submit',(function(e) {
+        e.preventDefault();
+        // let tags = new Array($("#tags").val());
+        // let tags = $("#tags").val();
+       
+     var url = new URLSearchParams(window.location.search);
+      let userId = url.get("id");
       
-            let responseData = {};
-            (response.result || []).forEach((row, i) => {
-              responseData += `<option value="${row._id}">${row.firstName || ''}</option>`;
-            });
-              
-              $('#professionalList').append(responseData)
-          },
-          error: function(data) {
-              console.log(data);
-          }
-      });
-  }
+       var formData = new FormData();
+     //formData.delete("tags");
+     
+      
+    //formData.append( 'files', input.files[0] );
+      formData.append( 'name', $("#name").val());
+      formData.append( 'createdBy', $("#professionalList").val());
+      formData.append( 'description', $("#description").val());
+      // formData.append( 'active', $("#status").val()==1?true:false);
+      // formData.append( 'category', $("#category").val());
+      //   for (var i = 0; i < tags.length; i++) {
+      //   formData.append("tags[" + i + "]", tags[i])
+      //   }
+      for (let i = 0; i < document.getElementById("files").files.length; i++) {
+          formData.append("file", document.getElementById("files").files[i])
+         }
+        
 
+    
+        $.ajax({ 
+           
+            url: localStorage.getItem("BASE_URL")+"/service/"+userId,
+            //url: "http://localhost:5000/api/service/"+userId,
+            type:'PUT',
+             headers: {
+            authorization: localStorage.getItem("token")
+            },
+            data:formData,
+            dataType: 'json',                   
+            async: false,
+            processData: false,
+            contentType: false,
+            mimeType: "multipart/form-data",
+            success:function(response){
+               if (response.error) alert(response.error);
+            else {
+              alert("Successfully Edit!")
+              window.location.href = './service.html';
+            }
+            },
+           error: function(response) {
+              console.log(response);
+          }
+    })
+  })
+  );
+   
 
  
 
 </script>
-
+<script>
+  $(".js-example-tags").select2({
+        tags: true
+      });
+</script>
 <footer id="footer"><a href="#">Cyberworx</a> &copy; 2019-2022 All Rights Reserved.</footer></div>
 <style>
     .toast-top-right .toast {

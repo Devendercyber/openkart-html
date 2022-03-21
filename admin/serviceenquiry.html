@@ -7,7 +7,7 @@
 <head>
 
 <meta charset="UTF-8" />
-<title>Services List</title>
+<title>Help List</title>
 <link rel="icon" type="image/x-icon" href="../uploads/images/1645186822_2377a38d68aab0717ea4.png">
 <base >
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
@@ -375,11 +375,11 @@
        
                     
          <li>
-          <a href="#collapse47" data-toggle="collapse" class="parent collapsed">Services</a>
+          <a href="#collapse47" data-toggle="collapse" class="parent collapsed">Help</a>
           <ul id="collapse47" class="collapse">
             
 
-           <li><a href="user.html">Services</a></li>
+           <li><a href="user.html">Help</a></li>
             
 
            <li><a href="user_group.html">User Group</a></li>
@@ -419,10 +419,10 @@
         <a href="add_service.html" data-toggle="tooltip" title="Add New" class="btn btn-primary"><i class="fa fa-plus"></i></a> &nbsp;
         <button type="button" data-toggle="tooltip" title="Delete" class="btn btn-danger" onclick="confirm('Are you sure?') ? $('#form-user').submit() : false;"><i class="fa fa-trash-o"></i></button>
       </div>
-      <h1>Services</h1>
+      <h1>Help</h1>
       <ul class="breadcrumb">
                <li><a href="dashboard.html">Home</a></li>
-<li><a href="javascript:void();">Services List</a></li>
+<li><a href="javascript:void();">Help List</a></li>
               </ul>
     </div>
   </div>
@@ -433,18 +433,21 @@
               <h3 class="panel-title"><i class="fa fa-list"></i> User List</h3>
       </div>
       <div class="panel-body">
-        <form action="http://cyberworx.co.in/flipspaces_new/admin/delete_users" id="form-user" method="post" accept-charset="utf-8">
+        <form action="" id="form-user" method="post" accept-charset="utf-8">
  
           <div class="table-responsive">
             <table class="table table-bordered table-hover example">
               <thead>
                 <tr>
                   <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
-                  <td class="text-left">Heading</td>
-                  <td class="text-left">Description</td>
-                  <td class="text-left">Status</td>
+                   <td class="text-left">Service</td>
+                  <td class="text-left">Name</td>
+                   <td class="text-left">Email</td>
+                   <td class="text-left">Number</td>
+                  <td class="text-left">Message</td>
+                 
                   <td class="text-left">Date Added</td>
-                  <td class="text-left">Action</td>
+                 
                 </tr>
               </thead>
               <tbody id ="tableBody"></tbody>
@@ -469,15 +472,16 @@
 <script type="text/javascript">
   $(document).ready(function() {
       if (!localStorage.getItem("token")) window.location.href = './../admin_console.html';
-      getServices();
+      getHelp();
       setTimeout(() => {
         $('#example').DataTable();
       }, 1000);
   });
-  
-  function getServices() {
+
+  function getHelp() {
       $.ajax({
-          url: localStorage.getItem("BASE_URL")+"/service",
+          url: localStorage.getItem("BASE_URL")+"/service/enquiry",
+          //url: "http://localhost:5000/api/help",
           headers: {
             authorization: localStorage.getItem("token")
           },
@@ -487,14 +491,13 @@
             (response.result || []).forEach((row, i) => {
               tableData += `<tr>
                 <td class="text-center"><input type="checkbox" name="selected[]" value="${i+1}"/></td>
-                <td class="text-center">${row.name || ''}</td>
-                <td class="text-center">${row.description || ''}</td>
-                <td class="text-center">${row.active ? 'Active' : 'Inactive'}</td>
+                <td class="text-center">${row.service.name || ''}</td>
+                 <td class="text-center">${row.name || ''}</td>
+                  <td class="text-center">${row.email || ''}</td>
+                  <td class="text-center">${row.phone || ''}</td>
+                <td class="text-center">${row.message || ''}</td>
                 <td class="text-center">${moment(row.createdAt || '').format('DD/MM/YYYY HH:mm:SS')}</td>
-                <td class="text-left">
-                <a href="edit_service.html?id=${row._id}"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i>&nbsp; Edit</button></a>
-                <button type="button" class="btn btn-danger" onclick="deleteService('${row._id}')" ><i class="fa fa-pencil"></i>&nbsp; Delete</button></a>
-                </td>
+               
               </tr>`;
             });
               
@@ -504,31 +507,6 @@
               console.log(data);
           }
       });
-  }
-  function deleteService(id)
-  {
-
-    $.ajax({
-         //url: localStorage.getItem("BASE_URL")+"/service/"+id,
-          url: "http//localhost:5000/api/service/"+id,
-          headers: {
-            authorization: localStorage.getItem("token")
-          },
-          type: "DELETE",
-          success :function(response)
-          {
-            if (response.error) alert(response.error);
-            else {
-              alert("Delete Successful!")
-              window.location.href = './user.html';
-            }
-          },
-          error : function(data)
-          {
-             alert("Service deletion failed! "+(data.error || data.responseText || data)) 
-          }
-    });
-    
   }
 </script>
 
@@ -544,5 +522,5 @@
 
 </body>
 
-</html>
 
+</html>
