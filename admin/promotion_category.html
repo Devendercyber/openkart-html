@@ -1,10 +1,13 @@
+ <!-- DEBUG-VIEW START 4 APPPATH/Views/admin/setting/user.php -->
+<!-- DEBUG-VIEW START 3 APPPATH/Views/layout/master_admin.php -->
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
+
 <head>
 
-
 <meta charset="UTF-8" />
-<title> Edit Attribute</title>
+<title>Promotion Category List</title>
 <link rel="icon" type="image/x-icon" href="../uploads/images/1645186822_2377a38d68aab0717ea4.png">
 <base >
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
@@ -372,11 +375,11 @@
        
                     
          <li>
-          <a href="#collapse47" data-toggle="collapse" class="parent collapsed">Attributes</a>
+          <a href="#collapse47" data-toggle="collapse" class="parent collapsed">Promotion Category</a>
           <ul id="collapse47" class="collapse">
             
 
-           <li><a href="user.html">Attributes</a></li>
+           <li><a href="user.html">Promotion Category</a></li>
             
 
            <li><a href="user_group.html">User Group</a></li>
@@ -409,89 +412,48 @@
 
 <!-- DEBUG-VIEW ENDED 1 APPPATH/Views/admin/header.php -->
 
-
 <div id="content">
   <div class="page-header">
     <div class="container-fluid">
       <div class="pull-right">
-        
-        <a href="attribute.html" data-toggle="tooltip" title="Back" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
-      <h1>Attribute</h1>
+        <a href="add_promotion_category.html" data-toggle="tooltip" title="Add New" class="btn btn-primary"><i class="fa fa-plus"></i></a> &nbsp;
+      
+      </div>
+      <h1>Promotion Category</h1>
       <ul class="breadcrumb">
                <li><a href="dashboard.html">Home</a></li>
-        <li><a href="javascript:void();"> Edit Attribute</a></li>
+<li><a href="javascript:void();">Promotion Category List</a></li>
               </ul>
     </div>
   </div>
   <div class="container-fluid">
-        <div class="panel panel-default">
+            <div class="panel panel-default">
       <div class="panel-heading">
       
-              <h3 class="panel-title"><i class="fa fa-pencil"></i>  Edit Attribute</h3>
+              <h3 class="panel-title"><i class="fa fa-list"></i> Promotion Category List</h3>
       </div>
-     
-     
-      <div class="panel-body form-horizontal">
-    <!-- <form id="saveAttributeData" method ="POST" >
-      --> 
-           <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-username">Category</label>
-            <div class="col-sm-10">
-              <select name="category" id="category" class="form-control">
-                <option value="">Select Category</option>
-                
-              </select>
-            </div>
+      <div class="panel-body">
+        <form action="" id="form-user" method="post" accept-charset="utf-8">
+ 
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover example">
+              <thead>
+                <tr>
+                  <td style="width: 1px;" class="text-center">S.No</td>
+                  <td class="text-left">Heading</td>
+                  <td class="text-left">Icon</td>
+                  <td class="text-left">Status</td>
+                  <td class="text-left">Date Added</td>
+                  <td class="text-left">Action</td>
+                </tr>
+              </thead>
+              <tbody id ="tableBody"></tbody>
+            </table>
           </div>
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-phoneNumber">Attribute Name</label>
-            <div class="col-sm-10">
-              <input type="text" name="name" id="name" value="" placeholder="Attribute Name" class="form-control" />
-            </div>
-          </div>
+       
+		
+		</form>
         
-          
-         <div class="form-group required ">
-            <label class="col-sm-2 control-label" for="input-phoneNumber">Attribute List</label>
-            <div class="col-sm-8">
-             
-            </div>
-            <div class="col-sm-2">
-              <a href="javascript:void(0);" class="add_button btn btn-success" title="Add field">Add More</a>
-            </div>
-          </div>
-
-          <div class="attribut_list">
-         </div>
-         
-      
-      
-
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-image">Status</label>
-            <div class="col-sm-10">
-               <select class="form-control" id="status" name="status">
-                <option value="">Select Status</option>
-                <option value="1" >Active</option>
-                <option value="0">De Active</option>
-               </select>
-            </div>
-          </div>
-
-         
-
-        
-         <!--  <input type="hidden" name="category" id="category" value="61fd4f42eb482c9afb25a23f">
-       -->
-         
-
-          <div class="text-right">
-            <button type="submit" class="btn btn-primary" onclick="saveAttribute()"><i class="fa fa-key"></i> Update</button>
-          </div>
-
-         
-      
-      </form>
       </div>
     </div>
   </div>
@@ -503,179 +465,86 @@
 <script type="text/javascript" src="../assets/backend/javascript/summernote/summernote-image-attributes.js"></script>
 <script type="text/javascript" src="../assets/backend/javascript/summernote/opencart.js"></script>
 <script type="text/javascript" src="../assets/frontend/js/toastr.min.js"></script>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <script type="text/javascript">
   $(document).ready(function() {
       if (!localStorage.getItem("token")) window.location.href = './../admin_console.html';
-    getCategory();
-    getAttribute();
+      getPromotion();
+      setTimeout(() => {
+        $('#example').DataTable();
+      }, 1000);
   });
-
-      function getAttribute()
-  {
-      var url = new URLSearchParams(window.location.search);
-      let attributeId = url.get("id");
-    $.ajax({
-          url: localStorage.getItem("BASE_URL")+"/attribute?_id="+attributeId,
+  
+  function getPromotion() {
+      $.ajax({
+          url: localStorage.getItem("BASE_URL")+"/marketing",
           headers: {
             authorization: localStorage.getItem("token")
           },
           type: "GET",
-          
           success: function(response) {
-            let responseData = (response.result || [])[0] || {};
-            let listData = '';
-            var addClass = '';
-              $('#category').val(responseData.category._id || '');
-              $('#name').val(responseData.name || '');
-              $('#code').val(responseData.code || '');
-              $('#status').val(responseData.active == true ? 1:0 || '');
-              (responseData.list || []).forEach((row, i) => {
-                
-              listData += `<div class="form-group required ">
-            <label class="col-sm-2 control-label" for="input-phoneNumber">Attribute List</label>
-            <div class="col-sm-8">
-              <input type="text" name="list[]" id="list" value="${row}" placeholder="Attribute List" class="form-control" />
-              </div>
-              <div class="col-sm-2">
-              <a href="javascript:void(0);" class="remove_button btn btn-danger" title="Add field">Remove</a>
-            
-            </div>
-          </div>`;
-            });
-               $('.attribut_list').html(listData)
-              
-          },
-          error: function(data) {
-              console.log(data);
-          }
-      });
-  }
-
-  
- 
- 
-        function saveAttribute(){
-        var url = new URLSearchParams(window.location.search);
-        let attributeId = url.get("id");
-       let arrayList = new Array ($("input[name='list[]']").map(function(){return $(this).val();}).get());
-         let data = {
-        name: $('#name').val(),
-       
-        active: $('#status').val()==1?true:false,
-        category: $('#category').val(),
-        list:arrayList
-      };
-    
-        $.ajax({
-           
-            url: localStorage.getItem("BASE_URL")+"/attribute/"+attributeId,
-           // url: "http://localhost:5000/api/attribute",
-             data:data,
-
-             headers: {
-            authorization: localStorage.getItem("token")
-          },
-            type:'PUT',
-           
-            success:function(response){
-               if (response.error) alert(response.error);
-            else {
-              alert("Successfully Edit!")
-              window.location.href = './attribute.html';
-            }
-            },
-           error: function(response) {
               console.log(response);
-          }
-    })
-  }; 
-
-  
-  function getCategory()
-  {
-  
-    $.ajax({
-          url: localStorage.getItem("BASE_URL")+"/category?active=true&limit=100",
-          //url: "http://localhost:5000/api/user?role="+"61fcef4beb482c9afb25a239",
-          headers: {
-            authorization: localStorage.getItem("token")
-          },
-          type: "GET",
-          
-          success: function(response) {
-      
-            let responseData = {};
+            let tableData = '';
             (response.result || []).forEach((row, i) => {
-              responseData += `<option value="${row._id}">${row.name || ''}</option>`;
+              tableData += `<tr>
+                <td class="text-center">${i+1}</td>
+               
+                <td class="text-center">${row.name || ''}</td>
+                <td class="text-center"><img src="${row.files[0].path || ''}"></td>
+                
+                <td class="text-center">${row.active ? 'Active' : 'Inactive'}</td>
+                <td class="text-center">${moment(row.createdAt || '').format('DD/MM/YYYY HH:mm:SS')}</td>
+                <td class="text-left">
+                <a href="edit_promotion_category.html?id=${row._id}"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i>&nbsp; Edit</button></a>
+                </td>
+              </tr>`;
             });
               
-              $('#category').append(responseData)
+              $('#tableBody').append(tableData)
           },
           error: function(data) {
               console.log(data);
           }
       });
   }
+  
+     function deleteAttribute(id)
+  {
 
-
- 
-</script>
-<script>
-  $(".js-example-tags").select2({
-  tags: true
-});
-</script>
-<script type="text/javascript">
-$(document).ready(function(){
-    var maxField = 20; //Input fields increment limitation
-    var addButton = $('.add_button'); //Add button selector
-    var wrapper = $('.attribut_list'); //Input field wrapper
-   // var fieldHTML = '<div><input type="text" name="field_name[]" value=""/><a href="javascript:void(0);" class="remove_button"><img src="remove-icon.png"/></a></div>'; //New input field html 
-    var fieldHTML = `<div class="form-group required ">
-            <label class="col-sm-2 control-label" for="input-phoneNumber">Attribute List</label>
-            <div class="col-sm-8">
-              <input type="text" name="list[]" id="list" value="" placeholder="Attribute List" class="form-control" />
-              </div>
-              <div class="col-sm-2">
-              <a href="javascript:void(0);" class="remove_button btn btn-danger" title="Add field">Remove</a>
-            </div>
-          </div>`;
-    var x = 1; //Initial field counter is 1
-    
-    //Once add button is clicked
-    $(addButton).click(function(){
-       
-        if(x < maxField){ 
-            x++; 
-            $(wrapper).append(fieldHTML); 
-        }
+    $.ajax({
+         url: localStorage.getItem("BASE_URL")+"/marketing/"+id,
+          headers: {
+            authorization: localStorage.getItem("token")
+          },
+          type: "DELETE",
+          success :function(response)
+          {
+            if (response.error) alert(response.error);
+            else {
+              alert("Delete Successful!")
+              window.location.href = './promotion_category.html';
+            }
+          },
+          error : function(data)
+          {
+             alert("Attribute deletion failed! "+(data.error || data.responseText || data)) 
+          }
     });
     
-    //Once remove button is clicked
-    $(wrapper).on('click', '.remove_button', function(e){
-        e.preventDefault();
-        $(this).parents('.form-group').remove(); 
-        x--; 
-    });
-});
+  }
 </script>
+
 <footer id="footer"><a href="#">Cyberworx</a> &copy; 2019-2022 All Rights Reserved.</footer></div>
 <style>
     .toast-top-right .toast {
-    background-color: #1d1d1d !important;
-    box-shadow: 0 0 12px #484848 !important;
-    border: 1px solid #3a3a3a;
-}
+        background-color: #1d1d1d !important;
+        box-shadow: 0 0 12px #484848 !important;
+        border: 1px solid #3a3a3a;
+    }
 </style>
-
-<!-- DEBUG-VIEW ENDED 2 APPPATH/Views/admin/footer.php -->
 
 
 </body>
 
-<!-- Mirrored from cyberworx.co.in/flipspaces_new/admin/add_user by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 23 Feb 2022 05:47:29 GMT -->
 </html>
-<!-- DEBUG-VIEW ENDED 3 APPPATH/Views/layout/master_admin.php -->
 
-<!-- DEBUG-VIEW ENDED 4 APPPATH/Views/admin/setting/add_user.php -->

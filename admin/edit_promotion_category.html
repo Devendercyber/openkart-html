@@ -4,7 +4,7 @@
 
 
 <meta charset="UTF-8" />
-<title> Edit Attribute</title>
+<title> Edit Promotion Category</title>
 <link rel="icon" type="image/x-icon" href="../uploads/images/1645186822_2377a38d68aab0717ea4.png">
 <base >
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
@@ -372,11 +372,11 @@
        
                     
          <li>
-          <a href="#collapse47" data-toggle="collapse" class="parent collapsed">Attributes</a>
+          <a href="#collapse47" data-toggle="collapse" class="parent collapsed">Promotion Categorys</a>
           <ul id="collapse47" class="collapse">
             
 
-           <li><a href="user.html">Attributes</a></li>
+           <li><a href="user.html">Promotion Categorys</a></li>
             
 
            <li><a href="user_group.html">User Group</a></li>
@@ -415,11 +415,11 @@
     <div class="container-fluid">
       <div class="pull-right">
         
-        <a href="attribute.html" data-toggle="tooltip" title="Back" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
-      <h1>Attribute</h1>
+        <a href="user.html" data-toggle="tooltip" title="Cancel" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>Promotion Categorys</h1>
       <ul class="breadcrumb">
                <li><a href="dashboard.html">Home</a></li>
-        <li><a href="javascript:void();"> Edit Attribute</a></li>
+        <li><a href="javascript:void();"> Add Promotion Category</a></li>
               </ul>
     </div>
   </div>
@@ -427,53 +427,41 @@
         <div class="panel panel-default">
       <div class="panel-heading">
       
-              <h3 class="panel-title"><i class="fa fa-pencil"></i>  Edit Attribute</h3>
+              <h3 class="panel-title"><i class="fa fa-pencil"></i>  Add Promotion Category</h3>
       </div>
      
      
       <div class="panel-body form-horizontal">
-    <!-- <form id="saveAttributeData" method ="POST" >
-      --> 
-           <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-username">Category</label>
-            <div class="col-sm-10">
-              <select name="category" id="category" class="form-control">
-                <option value="">Select Category</option>
-                
-              </select>
-            </div>
-          </div>
+    <form id="savePromotion" method ="POST" enctype="multipart/form-data">
+    
+    
           <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-phoneNumber">Attribute Name</label>
+            <label class="col-sm-2 control-label" for="input-phoneNumber">Heading</label>
             <div class="col-sm-10">
-              <input type="text" name="name" id="name" value="" placeholder="Attribute Name" class="form-control" />
+              <input type="text" name="name" id="name" value="" placeholder="Heading" class="form-control" />
             </div>
           </div>
+ 
         
-          
-         <div class="form-group required ">
-            <label class="col-sm-2 control-label" for="input-phoneNumber">Attribute List</label>
-            <div class="col-sm-8">
-             
-            </div>
-            <div class="col-sm-2">
-              <a href="javascript:void(0);" class="add_button btn btn-success" title="Add field">Add More</a>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-image">Image</label>
+            <div class="col-sm-10">
+                <img src="" id="images" height="100" width="100">
+                <input type="file" name="files" id="files" class="form-control" />
             </div>
           </div>
-
-          <div class="attribut_list">
-         </div>
-         
       
       
+          
 
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-image">Status</label>
             <div class="col-sm-10">
                <select class="form-control" id="status" name="status">
                 <option value="">Select Status</option>
-                <option value="1" >Active</option>
-                <option value="0">De Active</option>
+                <option value="true" >Active</option>
+                <option value="false">De Active</option>
                </select>
             </div>
           </div>
@@ -481,12 +469,12 @@
          
 
         
-         <!--  <input type="hidden" name="category" id="category" value="61fd4f42eb482c9afb25a23f">
+      <!--     <input type="hidden" name="category" id="category" value="61fd4f42eb482c9afb25a23f">
        -->
          
 
           <div class="text-right">
-            <button type="submit" class="btn btn-primary" onclick="saveAttribute()"><i class="fa fa-key"></i> Update</button>
+            <button type="submit" class="btn btn-primary" ><i class="fa fa-key"></i> Create</button>
           </div>
 
          
@@ -503,48 +491,35 @@
 <script type="text/javascript" src="../assets/backend/javascript/summernote/summernote-image-attributes.js"></script>
 <script type="text/javascript" src="../assets/backend/javascript/summernote/opencart.js"></script>
 <script type="text/javascript" src="../assets/frontend/js/toastr.min.js"></script>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ 
 <script type="text/javascript">
   $(document).ready(function() {
       if (!localStorage.getItem("token")) window.location.href = './../admin_console.html';
-    getCategory();
-    getAttribute();
-  });
 
-      function getAttribute()
+    getPromotion();
+  });
+   
+  
+ function getPromotion()
   {
-      var url = new URLSearchParams(window.location.search);
-      let attributeId = url.get("id");
+     var url = new URLSearchParams(window.location.search);
+      let userId = url.get("id");
     $.ajax({
-          url: localStorage.getItem("BASE_URL")+"/attribute?_id="+attributeId,
+          url: localStorage.getItem("BASE_URL")+"/marketing?_id="+userId,
           headers: {
             authorization: localStorage.getItem("token")
           },
           type: "GET",
-          
+          data : '',
           success: function(response) {
             let responseData = (response.result || [])[0] || {};
-            let listData = '';
-            var addClass = '';
-              $('#category').val(responseData.category._id || '');
-              $('#name').val(responseData.name || '');
-              $('#code').val(responseData.code || '');
-              $('#status').val(responseData.active == true ? 1:0 || '');
-              (responseData.list || []).forEach((row, i) => {
-                
-              listData += `<div class="form-group required ">
-            <label class="col-sm-2 control-label" for="input-phoneNumber">Attribute List</label>
-            <div class="col-sm-8">
-              <input type="text" name="list[]" id="list" value="${row}" placeholder="Attribute List" class="form-control" />
-              </div>
-              <div class="col-sm-2">
-              <a href="javascript:void(0);" class="remove_button btn btn-danger" title="Add field">Remove</a>
-            
-            </div>
-          </div>`;
-            });
-               $('.attribut_list').html(listData)
-              
+                    console.log(responseData.active==true ? 'true':'false');
+               
+                  $("#name").val(responseData.name || '');
+                  $("#status").val(responseData.active==true ? 'true':'false');
+                  $("#images").attr("src",responseData.files ? responseData.files[0].path : '');
+                   
+
           },
           error: function(data) {
               console.log(data);
@@ -553,112 +528,59 @@
   }
 
   
- 
- 
-        function saveAttribute(){
-        var url = new URLSearchParams(window.location.search);
-        let attributeId = url.get("id");
-       let arrayList = new Array ($("input[name='list[]']").map(function(){return $(this).val();}).get());
-         let data = {
-        name: $('#name').val(),
+  $('#savePromotion').on('submit',(function(e) {
+        e.preventDefault();
+        // let tags = new Array($("#tags").val());
+        // let tags = $("#tags").val();
        
-        active: $('#status').val()==1?true:false,
-        category: $('#category').val(),
-        list:arrayList
-      };
-    
-        $.ajax({
-           
-            url: localStorage.getItem("BASE_URL")+"/attribute/"+attributeId,
-           // url: "http://localhost:5000/api/attribute",
-             data:data,
+     var url = new URLSearchParams(window.location.search);
+      let userId = url.get("id");
+      
+       var formData = new FormData();
+     //formData.delete("tags");
+     var status = $("#status").val()=="true"?true:false;
+      
+    //formData.append( 'files', input.files[0] );
+      formData.append( 'name', $("#name").val());
+      formData.append( 'active', status);
+      formData.append("files", document.getElementById("files").files[0])
 
+    
+        $.ajax({ 
+           
+            url: localStorage.getItem("BASE_URL")+"/marketing/"+userId,
+            type:'PUT',
              headers: {
             authorization: localStorage.getItem("token")
-          },
-            type:'PUT',
-           
+            },
+            data:formData,
+            dataType: 'json',                   
+            async: false,
+            processData: false,
+            contentType: false,
+            mimeType: "multipart/form-data",
             success:function(response){
                if (response.error) alert(response.error);
             else {
               alert("Successfully Edit!")
-              window.location.href = './attribute.html';
+              window.location.href = './promotion_category.html';
             }
             },
            error: function(response) {
               console.log(response);
           }
     })
-  }; 
-
-  
-  function getCategory()
-  {
-  
-    $.ajax({
-          url: localStorage.getItem("BASE_URL")+"/category?active=true&limit=100",
-          //url: "http://localhost:5000/api/user?role="+"61fcef4beb482c9afb25a239",
-          headers: {
-            authorization: localStorage.getItem("token")
-          },
-          type: "GET",
-          
-          success: function(response) {
-      
-            let responseData = {};
-            (response.result || []).forEach((row, i) => {
-              responseData += `<option value="${row._id}">${row.name || ''}</option>`;
-            });
-              
-              $('#category').append(responseData)
-          },
-          error: function(data) {
-              console.log(data);
-          }
-      });
-  }
-
+  })
+  );
+   
 
  
+
 </script>
 <script>
   $(".js-example-tags").select2({
-  tags: true
-});
-</script>
-<script type="text/javascript">
-$(document).ready(function(){
-    var maxField = 20; //Input fields increment limitation
-    var addButton = $('.add_button'); //Add button selector
-    var wrapper = $('.attribut_list'); //Input field wrapper
-   // var fieldHTML = '<div><input type="text" name="field_name[]" value=""/><a href="javascript:void(0);" class="remove_button"><img src="remove-icon.png"/></a></div>'; //New input field html 
-    var fieldHTML = `<div class="form-group required ">
-            <label class="col-sm-2 control-label" for="input-phoneNumber">Attribute List</label>
-            <div class="col-sm-8">
-              <input type="text" name="list[]" id="list" value="" placeholder="Attribute List" class="form-control" />
-              </div>
-              <div class="col-sm-2">
-              <a href="javascript:void(0);" class="remove_button btn btn-danger" title="Add field">Remove</a>
-            </div>
-          </div>`;
-    var x = 1; //Initial field counter is 1
-    
-    //Once add button is clicked
-    $(addButton).click(function(){
-       
-        if(x < maxField){ 
-            x++; 
-            $(wrapper).append(fieldHTML); 
-        }
-    });
-    
-    //Once remove button is clicked
-    $(wrapper).on('click', '.remove_button', function(e){
-        e.preventDefault();
-        $(this).parents('.form-group').remove(); 
-        x--; 
-    });
-});
+        tags: true
+      });
 </script>
 <footer id="footer"><a href="#">Cyberworx</a> &copy; 2019-2022 All Rights Reserved.</footer></div>
 <style>
