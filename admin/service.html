@@ -439,7 +439,7 @@
             <table class="table table-bordered table-hover example">
               <thead>
                 <tr>
-                  <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+                  <td style="width: 1px;" class="text-center">#</td>
                   <td class="text-left">Heading</td>
                   <td class="text-left">Description</td>
                   <td class="text-left">Status</td>
@@ -486,7 +486,7 @@
             let tableData = '';
             (response.result || []).forEach((row, i) => {
               tableData += `<tr>
-                <td class="text-center"><input type="checkbox" name="selected[]" value="${i+1}"/></td>
+                <td class="text-center">${i+1}</td>
                 <td class="text-center">${row.name || ''}</td>
                 <td class="text-center">${row.description || ''}</td>
                 <td class="text-center">${row.active ? 'Active' : 'Inactive'}</td>

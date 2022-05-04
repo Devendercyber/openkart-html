@@ -7,7 +7,7 @@
 <head>
 
 <meta charset="UTF-8" />
-<title>Help List</title>
+<title>Service Enquiry List</title>
 <link rel="icon" type="image/x-icon" href="../uploads/images/1645186822_2377a38d68aab0717ea4.png">
 <base >
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
@@ -375,11 +375,11 @@
        
                     
          <li>
-          <a href="#collapse47" data-toggle="collapse" class="parent collapsed">Help</a>
+          <a href="#collapse47" data-toggle="collapse" class="parent collapsed">Service Enquiry</a>
           <ul id="collapse47" class="collapse">
             
 
-           <li><a href="user.html">Help</a></li>
+           <li><a href="user.html">Service Enquiry</a></li>
             
 
            <li><a href="user_group.html">User Group</a></li>
@@ -416,13 +416,13 @@
   <div class="page-header">
     <div class="container-fluid">
       <div class="pull-right">
-        <a href="add_service.html" data-toggle="tooltip" title="Add New" class="btn btn-primary"><i class="fa fa-plus"></i></a> &nbsp;
-        <button type="button" data-toggle="tooltip" title="Delete" class="btn btn-danger" onclick="confirm('Are you sure?') ? $('#form-user').submit() : false;"><i class="fa fa-trash-o"></i></button>
+        <!-- <a href="add_service.html" data-toggle="tooltip" title="Add New" class="btn btn-primary"><i class="fa fa-plus"></i></a> &nbsp;
+        <button type="button" data-toggle="tooltip" title="Delete" class="btn btn-danger" onclick="confirm('Are you sure?') ? $('#form-user').submit() : false;"><i class="fa fa-trash-o"></i></button> -->
       </div>
-      <h1>Help</h1>
+      <h1>Service Enquiry</h1>
       <ul class="breadcrumb">
                <li><a href="dashboard.html">Home</a></li>
-<li><a href="javascript:void();">Help List</a></li>
+<li><a href="javascript:void();">Service Enquiry List</a></li>
               </ul>
     </div>
   </div>
@@ -439,7 +439,7 @@
             <table class="table table-bordered table-hover example">
               <thead>
                 <tr>
-                  <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+                  <td style="width: 1px;" class="text-center">#</td>
                    <td class="text-left">Service</td>
                   <td class="text-left">Name</td>
                    <td class="text-left">Email</td>
@@ -490,7 +490,7 @@
             let tableData = '';
             (response.result || []).forEach((row, i) => {
               tableData += `<tr>
-                <td class="text-center"><input type="checkbox" name="selected[]" value="${i+1}"/></td>
+                <td class="text-center">${i+1}</td>
                 <td class="text-center">${row.service.name || ''}</td>
                  <td class="text-center">${row.name || ''}</td>
                   <td class="text-center">${row.email || ''}</td>

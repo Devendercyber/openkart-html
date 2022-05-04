@@ -1,13 +1,10 @@
- <!-- DEBUG-VIEW START 4 APPPATH/Views/admin/setting/user.php -->
-<!-- DEBUG-VIEW START 3 APPPATH/Views/layout/master_admin.php -->
 
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
 <head>
-
 <meta charset="UTF-8" />
-<title>Help List</title>
+<title>Professional List</title>
 <link rel="icon" type="image/x-icon" href="../uploads/images/1645186822_2377a38d68aab0717ea4.png">
 <base >
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
@@ -38,13 +35,13 @@
 <script src="http://cyberworx.co.in/flipspaces_new/assets/ckfinder/ckfinder.js"></script> -->
 
 <!-- select 2 -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<link href="../../../cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<script src="../../../cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
 <!-- datatable -->
-<link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="../../../cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet" />
 
-<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="../../../cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 
 <link type="text/css" href="../assets/backend/stylesheet/custom.css" rel="stylesheet" media="screen" />
 
@@ -375,11 +372,11 @@
        
                     
          <li>
-          <a href="#collapse47" data-toggle="collapse" class="parent collapsed">Help</a>
+          <a href="#collapse47" data-toggle="collapse" class="parent collapsed">Professional</a>
           <ul id="collapse47" class="collapse">
             
 
-           <li><a href="user.html">Help</a></li>
+           <li><a href="user.html">Professional</a></li>
             
 
            <li><a href="user_group.html">User Group</a></li>
@@ -416,14 +413,13 @@
   <div class="page-header">
     <div class="container-fluid">
       <div class="pull-right">
-        <!-- <a href="add_service.html" data-toggle="tooltip" title="Add New" class="btn btn-primary"><i class="fa fa-plus"></i></a> &nbsp;
-        <button type="button" data-toggle="tooltip" title="Delete" class="btn btn-danger" onclick="confirm('Are you sure?') ? $('#form-user').submit() : false;"><i class="fa fa-trash-o"></i></button> -->
-      
+       <!--  <a href="add_user.html" data-toggle="tooltip" title="Add New" class="btn btn-primary"><i class="fa fa-plus"></i></a> &nbsp; -->
+        <button type="button" data-toggle="tooltip" title="Delete" class="btn btn-danger" onclick="confirm('Are you sure?') ? $('#form-user').submit() : false;"><i class="fa fa-trash-o"></i></button>
       </div>
-      <h1>Help</h1>
+      <h1>Professional</h1>
       <ul class="breadcrumb">
                <li><a href="dashboard.html">Home</a></li>
-<li><a href="javascript:void();">Help List</a></li>
+<li><a href="javascript:void();">Professional List</a></li>
               </ul>
     </div>
   </div>
@@ -434,28 +430,30 @@
               <h3 class="panel-title"><i class="fa fa-list"></i> User List</h3>
       </div>
       <div class="panel-body">
-        <form action="" id="form-user" method="post" accept-charset="utf-8">
+        <form action="http://cyberworx.co.in/flipspaces_new/admin/" id="form-user" method="post" accept-charset="utf-8">
  
           <div class="table-responsive">
             <table class="table table-bordered table-hover example">
               <thead>
                 <tr>
-                  <td style="width: 1px;" class="text-center">#</td>
-                  <td class="text-left">Name</td>
-                   <td class="text-left">Email</td>
-                   <td class="text-left">Number</td>
-                  <td class="text-left">Concern</td>
+                  <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+                  <td class="text-left">First Name</td>
+                  <td class="text-left">Last Name</td>
+                  <td class="text-left">Username</td>
+                  <td class="text-left">Email</td>
+                  <td class="text-left">Mobile</td>
+                  <td class="text-left">Role</td>
+                  <td class="text-left">Type</td>
                   <td class="text-left">Status</td>
+                  <td class="text-left">Profile</td>
                   <td class="text-left">Date Added</td>
-                 
+                  <td class="text-left">Action</td>
                 </tr>
               </thead>
               <tbody id ="tableBody"></tbody>
             </table>
           </div>
-       
-		
-		</form>
+        <div style="display:none"><label>Fill This Field</label><input type="text" name="indo_honeypot" value=""/></div></form>
         
       </div>
     </div>
@@ -472,16 +470,15 @@
 <script type="text/javascript">
   $(document).ready(function() {
       if (!localStorage.getItem("token")) window.location.href = './../admin_console.html';
-      getHelp();
+      getUsers();
       setTimeout(() => {
         $('#example').DataTable();
       }, 1000);
   });
 
-  function getHelp() {
+  function getUsers() {
       $.ajax({
-          url: localStorage.getItem("BASE_URL")+"/help",
-          //url: "http://localhost:5000/api/help",
+          url: localStorage.getItem("BASE_URL")+"/user/getUserList?roleId=62090b6f4558914b0e351eb9",
           headers: {
             authorization: localStorage.getItem("token")
           },
@@ -490,14 +487,18 @@
             let tableData = '';
             (response.result || []).forEach((row, i) => {
               tableData += `<tr>
-                <td class="text-center">${i+1}</td>
-                <td class="text-center">${row.name || ''}</td>
-                  <td class="text-center">${row.email || ''}</td>
-                  <td class="text-center">${row.phone || ''}</td>
-                <td class="text-center">${row.concern || ''}</td>
-                <td class="text-center">${row.active ? 'Active' : 'Inactive'}</td>
+                <td class="text-center"><input type="checkbox" name="selected[]" value="${i+1}"/></td>
+                <td class="text-center">${row.firstName || ''}</td>
+                <td class="text-center">${row.lastName || ''}</td>
+                <td class="text-center">${row.userName || ''}</td>
+                <td class="text-center">${row.email || ''}</td>
+                <td class="text-center">${row.phoneNumber || ''}</td>
+                <td class="text-center">${row.role.name || ''}</td>
+                <td class="text-center">${row.commisionType || ''}</td>
+                <td class="text-center">${row.active == true ? 'Active' : 'Inactive'}</td>
+                 <td class="text-center">${row.private == true ? 'Private' : 'Public'}</td>
                 <td class="text-center">${moment(row.createdAt || '').format('DD/MM/YYYY HH:mm:SS')}</td>
-               
+                <td class="text-left"><a href="edit_professional.html?id=${row._id}"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i>&nbsp; Edit</button></a></td>
               </tr>`;
             });
               
@@ -508,6 +509,8 @@
           }
       });
   }
+
+
 </script>
 
 <footer id="footer"><a href="#">Cyberworx</a> &copy; 2019-2022 All Rights Reserved.</footer></div>
@@ -522,3 +525,4 @@
 </body>
 
 </html>
+
