@@ -1,13 +1,13 @@
-
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
 <head>
+
 <meta charset="UTF-8" />
-<title>Professional List</title>
+<title> Add Coupon</title>
 <link rel="icon" type="image/x-icon" href="../uploads/images/1645186822_2377a38d68aab0717ea4.png">
 <base >
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, Coupon-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="Flipspaces">
@@ -35,13 +35,13 @@
 <script src="http://cyberworx.co.in/flipspaces_new/assets/ckfinder/ckfinder.js"></script> -->
 
 <!-- select 2 -->
-<link href="../../../cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-<script src="../../../cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
 <!-- datatable -->
-<link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="../../../cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet" />
 
-<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="../../../cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 
 <link type="text/css" href="../assets/backend/stylesheet/custom.css" rel="stylesheet" media="screen" />
 
@@ -61,11 +61,11 @@
      <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <img src="../uploads/images/1642223944_122d6a644e5ee28f83be.jpg" alt="cyberworx" title="admin" id="user-profile" class="img-circle"  style="width: 50px;" />cyberworx <i class="fa fa-caret-down fa-fw"></i>
+        <img src="../uploads/images/1642223944_122d6a644e5ee28f83be.jpg" alt="cyberworx" title="admin" id="Coupon-profile" class="img-circle"  style="width: 50px;" />cyberworx <i class="fa fa-caret-down fa-fw"></i>
        </a>
        <ul class="dropdown-menu dropdown-menu-right">
         <li>
-         <a href="profile.html"><i class="fa fa-user-circle-o fa-fw"></i> Your Profile</a>
+         <a href="profile.html"><i class="fa fa-Coupon-circle-o fa-fw"></i> Your Profile</a>
         </li>
         
         <li>
@@ -372,14 +372,14 @@
        
                     
          <li>
-          <a href="#collapse47" data-toggle="collapse" class="parent collapsed">Professional</a>
+          <a href="#collapse47" data-toggle="collapse" class="parent collapsed">Coupon</a>
           <ul id="collapse47" class="collapse">
             
 
-           <li><a href="user.html">Professional</a></li>
+           <li><a href="Coupon.html">Coupon</a></li>
             
 
-           <li><a href="user_group.html">User Group</a></li>
+           <li><a href="Coupon_group.html">Coupon Group</a></li>
                     </ul>
          </li>
 
@@ -409,52 +409,115 @@
 
 <!-- DEBUG-VIEW ENDED 1 APPPATH/Views/admin/header.php -->
 
+
 <div id="content">
   <div class="page-header">
     <div class="container-fluid">
       <div class="pull-right">
-       <!--  <a href="add_user.html" data-toggle="tooltip" title="Add New" class="btn btn-primary"><i class="fa fa-plus"></i></a> &nbsp; -->
-        <button type="button" data-toggle="tooltip" title="Delete" class="btn btn-danger" onclick="confirm('Are you sure?') ? $('#form-user').submit() : false;"><i class="fa fa-trash-o"></i></button>
-      </div>
-      <h1>Professional</h1>
+        <button type="submit" form="form-Coupon" data-toggle="tooltip" title="Save" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="coupon.html" data-toggle="tooltip" title="Cancel" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>Coupon</h1>
       <ul class="breadcrumb">
                <li><a href="dashboard.html">Home</a></li>
-<li><a href="javascript:void();">Professional List</a></li>
+        <li><a href="javascript:void();"> Add Coupon</a></li>
               </ul>
     </div>
   </div>
   <div class="container-fluid">
-            <div class="panel panel-default">
+        <div class="panel panel-default">
       <div class="panel-heading">
       
-              <h3 class="panel-title"><i class="fa fa-list"></i> User List</h3>
+              <h3 class="panel-title"><i class="fa fa-pencil"></i>  Add Coupon</h3>
       </div>
-      <div class="panel-body">
-        <form action="http://cyberworx.co.in/flipspaces_new/admin/" id="form-user" method="post" accept-charset="utf-8">
- 
-          <div class="table-responsive">
-            <table class="table table-bordered table-hover example" id="example">
-              <thead>
-                <tr>
-                  <td style="width: 1px;" class="text-center">S.no</td>
-                  <td class="text-left">First Name</td>
-                  <td class="text-left">Last Name</td>
-                  <td class="text-left">Username</td>
-                  <td class="text-left">Email</td>
-                  <td class="text-left">Mobile</td>
+     
+     
+      <div class="panel-body form-horizontal">
+        <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-Couponname">Select Product</label>
+            <div class="col-sm-10">
+              
+              <select class="js-example-basic-multiple form-control" name="products[]" id="products" multiple="multiple">
                   
-                  <td class="text-left">Type</td>
-                  <td class="text-left">Status</td>
-                  <td class="text-left">Profile</td>
-                  <td class="text-left">Date Added</td>
-                  <td class="text-left">Action</td>
-                </tr>
-              </thead>
-              <tbody id ="tableBody"></tbody>
-            </table>
+                </select>
+            </div>
           </div>
-        <div style="display:none"><label>Fill This Field</label><input type="text" name="indo_honeypot" value=""/></div></form>
-        
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-phoneNumber">Coupon Name</label>
+            <div class="col-sm-10">
+              <input type="text" name="couponName" id="couponName" value="" placeholder="Coupon Name" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-Couponname">Coupon Code</label>
+            <div class="col-sm-10">
+              <input type="text" name="couponCode" id="couponCode" value="" placeholder="Coupon Code" class="form-control" />
+            </div>
+          </div>
+      
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-Couponname">Discount Type</label>
+            <div class="col-sm-10">
+              <select name="discountType" id="discountType" class="form-control">
+                <option value="">Select Discount Type</option>
+                <option value="AMOUNT" >Fixed Amount</option>
+                <option value="PERCENTAGE" >Percentage</option>
+               
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-lastname">Discount</label>
+            <div class="col-sm-10">
+              <input type="text" name="value" id="value" value="" placeholder="Discount" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-email">Minimum Amount</label>
+            <div class="col-sm-10">
+              <input type="text" name="minValue" id="minValue" value="" placeholder="Minimum Amount" class="form-control" />
+            </div>
+          </div>
+
+           <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-email">Start Date</label>
+            <div class="col-sm-10">
+              <input type="date" name="startDate" id="startDate" value="" placeholder="E-Mail" class="form-control" />
+            </div>
+          </div>
+
+           <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-email">End Date</label>
+            <div class="col-sm-10">
+              <input type="date" name="endDate" id="endDate" value="" placeholder="E-Mail" class="form-control" />
+            </div>
+          </div>
+
+         
+
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-Couponname">Status</label>
+            <div class="col-sm-10">
+              <select name="active" id="active" class="form-control">
+                <option value="">Select Status</option>
+                <option value="1" >Active</option>
+                <option value="0" >Inactive</option>
+               
+              </select>
+            </div>
+          </div>
+
+          
+
+          
+
+          <div class="text-right">
+            <button type="submit" class="btn btn-primary" onclick="addCoupon()"><i class="fa fa-key"></i> Create</button>
+          </div>
+
+          <div style="display:none"><label>Fill This Field</label><input type="text" name="indo_honeypot" value=""/></div></form>
       </div>
     </div>
   </div>
@@ -466,63 +529,95 @@
 <script type="text/javascript" src="../assets/backend/javascript/summernote/summernote-image-attributes.js"></script>
 <script type="text/javascript" src="../assets/backend/javascript/summernote/opencart.js"></script>
 <script type="text/javascript" src="../assets/frontend/js/toastr.min.js"></script>
-
+ 
 <script type="text/javascript">
   $(document).ready(function() {
       if (!localStorage.getItem("token")) window.location.href = './../admin_console.html';
-      getUsers();
-      // setTimeout(() => {
-      //   $('#example').DataTable();
-      // }, 1000);
+      getProducts();
   });
 
-  function getUsers() {
+  $(document).ready(function() {
+    $('.js-example-basic-multiple').select2({
+        tags: true,
+        maximumSelectionLength: 3
+    });
+});
+
+  function addCoupon() {
+    let products = new Array($("#products").val());
+
+      let data = {
+        couponName: $('#couponName').val(),
+        couponCode: $('#couponCode').val(),
+        discountType: $('#discountType').val(),
+        value: $('#value').val(),
+        minValue: $('#minValue').val(),
+        products: products,
+        startDate: moment($('#startDate').val()).valueOf(),
+        endDate: moment($('#endDate').val()).valueOf(),
+        active: $('#active').val()==1?true:false
+      };
+        // for (var i = 0; i < products.length; i++) {
+        // formData.append("tags[" + i + "]", products[i])
+        // }
+
       $.ajax({
-          url: localStorage.getItem("BASE_URL")+"/user/getUserList?roleId=62090b6f4558914b0e351eb9",
+          url: localStorage.getItem("BASE_URL")+"/discount",
+          data: data,
+          headers: {
+            authorization: localStorage.getItem("token")
+          },
+          type: "POST",
+          success: function(response) {
+            if (response.error) alert(response.error);
+            else {
+              alert("Success!")
+              window.location.href = './add_coupon.html';
+            }
+          },
+          error: function(data) {
+            alert("Coupon creation failed! "+(data.error || data.responseText || data))
+          }
+      });
+  }
+
+   function getProducts()
+  {
+  
+    $.ajax({
+          url: localStorage.getItem("BASE_URL")+"/product?limit=1000",
           headers: {
             authorization: localStorage.getItem("token")
           },
           type: "GET",
+          data : '',
           success: function(response) {
-            let tableData = '';
+            let responseData = {};
             (response.result || []).forEach((row, i) => {
-              tableData += `<tr>
-                <td class="text-center">${i+1}</td>
-                <td class="text-center">${row.firstName || ''}</td>
-                <td class="text-center">${row.lastName || ''}</td>
-                <td class="text-center">${row.userName || ''}</td>
-                <td class="text-center">${row.email || ''}</td>
-                <td class="text-center">${row.phoneNumber || ''}</td>
-               
-                <td class="text-center">${row.commisionType || ''}</td>
-                <td class="text-center">${row.active == true ? 'Active' : 'Inactive'}</td>
-                 <td class="text-center">${row.private == true ? 'Private' : 'Public'}</td>
-                <td class="text-center">${moment(row.createdAt || '').format('DD/MM/YYYY HH:mm:SS')}</td>
-                <td class="text-left"><a href="edit_professional.html?id=${row._id}"><button type="button" class="btn btn-info"><i class="fa fa-pencil"></i>&nbsp; Edit</button></a></td>
-              </tr>`;
+              responseData += `<option value="${row._id}">${row.name || ''}</option>`;
             });
               
-              $('#tableBody').append(tableData)
+              $('#products').append(responseData)
           },
           error: function(data) {
               console.log(data);
           }
       });
   }
-
-
 </script>
 
 <footer id="footer"><a href="#">Cyberworx</a> &copy; 2019-2022 All Rights Reserved.</footer></div>
 <style>
     .toast-top-right .toast {
-        background-color: #1d1d1d !important;
-        box-shadow: 0 0 12px #484848 !important;
-        border: 1px solid #3a3a3a;
-    }
+    background-color: #1d1d1d !important;
+    box-shadow: 0 0 12px #484848 !important;
+    border: 1px solid #3a3a3a;
+}
 </style>
 
+
 </body>
+
 
 </html>
 
